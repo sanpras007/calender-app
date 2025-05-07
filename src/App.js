@@ -1,6 +1,6 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, parseISO, isSameMonth } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, parseISO, isSameMonth, setMonth, setYear } from 'date-fns';
 import './App.css';
 import eventsData from './events.json';
 import holidaysData from './holidays.json';
@@ -104,26 +104,73 @@ function App() {
 
   const allDays = [...getPreviousMonthDays(), ...days, ...getNextMonthDays()];
 
+  const handleMonthChange = (e) => {
+    const newMonth = parseInt(e.target.value);
+    setCurrentDate(prevDate => setMonth(prevDate, newMonth));
+  };
+
+  const handleYearChange = (e) => {
+    const newYear = parseInt(e.target.value);
+    setCurrentDate(prevDate => setYear(prevDate, newYear));
+  };
+
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+  };
+
+  // Generate array of years (current year ± 10 years)
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 21 }, (_, i) => currentYear - 10 + i);
+
+  // Array of months
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
   return (
     <div className="app-container">
       <div className="calendar-container">
         {/* Header */}
         <div className="calendar-header">
-          <button
-            onClick={prevMonth}
-            className="calendar-nav-button"
-          >
-            Previous
-          </button>
-          <h2 className="calendar-title">
-            {format(currentDate, 'MMMM yyyy')}
-          </h2>
-          <button
-            onClick={nextMonth}
-            className="calendar-nav-button"
-          >
-            Next
-          </button>
+          <div className="calendar-nav">
+            <button
+              onClick={prevMonth}
+              className="calendar-nav-button"
+            >
+              Previous
+            </button>
+            <div className="calendar-title">
+              <select 
+                value={format(currentDate, 'MMMM')} 
+                onChange={handleMonthChange}
+                className="month-select"
+              >
+                {months.map((month, index) => (
+                  <option key={month} value={index}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+              <select 
+                value={format(currentDate, 'yyyy')} 
+                onChange={handleYearChange}
+                className="year-select"
+              >
+                {years.map(year => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button
+              onClick={nextMonth}
+              className="calendar-nav-button"
+            >
+              Next
+            </button>
+          </div>
         </div>
 
         {/* Calendar Grid */}
@@ -153,7 +200,7 @@ function App() {
               <div
                 key={day.toISOString()}
                 className={`calendar-day ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''} ${!isCurrentMonth ? 'other-month' : ''} ${isWeekend ? 'weekend' : ''} ${holiday ? 'holiday' : ''}`}
-                onClick={() => setSelectedDate(day)}
+                onClick={() => handleDateClick(day)}
                 data-type={holidayType}
               >
                 <span>{format(day, 'd')}</span>
