@@ -311,7 +311,7 @@ body {
   position: sticky;
   top: 1.5rem;
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .side-menu.closed {
@@ -639,7 +639,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .side-menu-toggle svg {
@@ -682,6 +682,7 @@ body {
     width: 100%;
     position: static;
     min-width: 0;
+    overflow: visible;
   }
 
   .side-menu.closed {
@@ -698,6 +699,7 @@ body {
     background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     border: none;
     box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
+    z-index: 1000;
   }
 
   .side-menu-toggle svg {

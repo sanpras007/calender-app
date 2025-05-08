@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
 function SideMenu({ selectedDate, onAddEvent, events, onDeleteEvent, holiday }) {
   const [newEvent, setNewEvent] = useState({ title: '', time: '', description: '', duration: 1 });
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+
+  // Auto-open side menu when a date with events or holiday is selected
+  useEffect(() => {
+    if (selectedDate) {
+      const hasEvents = events.some(event => event.date === format(selectedDate, 'yyyy-MM-dd'));
+      if (hasEvents || holiday) {
+        setIsOpen(true);
+      }
+    }
+  }, [selectedDate, events, holiday]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
