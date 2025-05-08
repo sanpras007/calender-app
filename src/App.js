@@ -86,7 +86,9 @@ function App() {
     const prevMonthEnd = new Date(monthStart);
     prevMonthEnd.setDate(0);
     const prevMonthDays = [];
-    for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+    // Adjust for Monday start (0 = Sunday, 1 = Monday, etc.)
+    const adjustedFirstDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
+    for (let i = adjustedFirstDay - 1; i >= 0; i--) {
       prevMonthDays.push(new Date(prevMonthEnd.getFullYear(), prevMonthEnd.getMonth(), prevMonthEnd.getDate() - i));
     }
     return prevMonthDays;
@@ -96,7 +98,10 @@ function App() {
   const getNextMonthDays = () => {
     const lastDayOfMonth = monthEnd.getDay();
     const nextMonthDays = [];
-    for (let i = 1; i <= 6 - lastDayOfMonth; i++) {
+    // Adjust for Monday start
+    const adjustedLastDay = lastDayOfMonth === 0 ? 6 : lastDayOfMonth - 1;
+    const daysToAdd = 6 - adjustedLastDay;
+    for (let i = 1; i <= daysToAdd; i++) {
       nextMonthDays.push(new Date(monthEnd.getFullYear(), monthEnd.getMonth(), monthEnd.getDate() + i));
     }
     return nextMonthDays;
@@ -176,10 +181,10 @@ function App() {
         {/* Calendar Grid */}
         <div className="calendar-grid">
           {/* Weekday Headers */}
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, index) => (
             <div 
               key={day} 
-              className={`weekday-header ${index === 0 || index === 6 ? 'weekend' : ''}`}
+              className={`weekday-header ${index === 6 ? 'weekend' : ''}`}
             >
               {day}
             </div>

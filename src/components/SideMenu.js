@@ -70,6 +70,34 @@ function SideMenu({ selectedDate, onAddEvent, events, onDeleteEvent, holiday }) 
           <div className="events-section">
             <div className="events-header">
               <h4>Events</h4>
+            </div>
+
+            <div className="events-list">
+              {eventsOnSelectedDate.length > 0 ? (
+                eventsOnSelectedDate.map((event, index) => (
+                  <div key={index} className="event-item">
+                    <div className="event-item-header">
+                      <span className="event-time">{event.time}</span>
+                      <button
+                        className="delete-event-button"
+                        onClick={() => onDeleteEvent(event)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <h5>{event.title}</h5>
+                    {event.description && (
+                      <p className="event-description">{event.description}</p>
+                    )}
+                    <p className="event-duration">{event.duration} hour{event.duration !== 1 ? 's' : ''}</p>
+                  </div>
+                ))
+              ) : (
+                <div className="no-events">No events scheduled for this date</div>
+              )}
+            </div>
+
+            <div className="events-header" style={{ marginTop: '1rem' }}>
               <button 
                 className="add-event-toggle"
                 onClick={() => setIsAddingEvent(!isAddingEvent)}
@@ -126,31 +154,6 @@ function SideMenu({ selectedDate, onAddEvent, events, onDeleteEvent, holiday }) 
                 </button>
               </form>
             )}
-
-            <div className="events-list">
-              {eventsOnSelectedDate.length > 0 ? (
-                eventsOnSelectedDate.map((event, index) => (
-                  <div key={index} className="event-item">
-                    <div className="event-item-header">
-                      <span className="event-time">{event.time}</span>
-                      <button
-                        className="delete-event-button"
-                        onClick={() => onDeleteEvent(event)}
-                      >
-                        ×
-                      </button>
-                    </div>
-                    <h5>{event.title}</h5>
-                    {event.description && (
-                      <p className="event-description">{event.description}</p>
-                    )}
-                    <p className="event-duration">{event.duration} hour{event.duration !== 1 ? 's' : ''}</p>
-                  </div>
-                ))
-              ) : (
-                <div className="no-events">No events scheduled for this date</div>
-              )}
-            </div>
           </div>
         </>
       )}

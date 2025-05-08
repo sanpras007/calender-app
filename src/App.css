@@ -173,9 +173,21 @@ body {
 }
 
 .calendar-day.selected {
-  background-color: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-color: #3b82f6 !important;
+}
+
+.calendar-day.selected .holiday-name {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.calendar-day.selected:hover {
+  background-color: #2563eb !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
 }
 
 .calendar-day.other-month {
@@ -185,21 +197,18 @@ body {
 }
 
 /* Weekend styles */
-.calendar-day:nth-child(7n),
-.calendar-day:nth-child(7n+1) {
+.calendar-day:nth-child(7n+7) {
   background-color: #fff5f5;
   border-color: #fecaca;
 }
 
-.calendar-day:nth-child(7n):hover,
-.calendar-day:nth-child(7n+1):hover {
+.calendar-day:nth-child(7n+7):hover {
   background-color: #fee2e2;
 }
 
-.calendar-day:nth-child(7n).other-month,
-.calendar-day:nth-child(7n+1).other-month {
+.calendar-day:nth-child(7n+7).other-month {
   background-color: #fff5f5;
-  color: #b91c1c;
+  color: #fb7185;
   opacity: 0.8;
 }
 
@@ -724,22 +733,28 @@ body {
 }
 
 /* Weekend styles with holiday consideration */
-.calendar-day:nth-child(7n),
-.calendar-day:nth-child(7n+1) {
+.calendar-day:nth-child(7n+7) {
   background-color: #fff5f5;
   border-color: #fecaca;
 }
 
-.calendar-day:nth-child(7n):hover,
-.calendar-day:nth-child(7n+1):hover {
+.calendar-day:nth-child(7n+7):hover {
   background-color: #fee2e2;
 }
 
-.calendar-day:nth-child(7n).other-month,
-.calendar-day:nth-child(7n+1).other-month {
+.calendar-day:nth-child(7n+7).other-month {
   background-color: #fff5f5;
   color: #fb7185;
   opacity: 0.8;
+}
+
+/* Remove duplicate weekend styles */
+.calendar-day:nth-child(7n+6),
+.calendar-day:nth-child(7n+6):hover,
+.calendar-day:nth-child(7n+6).other-month {
+  background-color: white;
+  border-color: #e2e8f0;
+  color: inherit;
 }
 
 /* Responsive Design */
