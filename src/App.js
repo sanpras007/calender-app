@@ -86,7 +86,6 @@ function App() {
     const prevMonthEnd = new Date(monthStart);
     prevMonthEnd.setDate(0);
     const prevMonthDays = [];
-    // Adjust for Monday start (0 = Sunday, 1 = Monday, etc.)
     const adjustedFirstDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
     for (let i = adjustedFirstDay - 1; i >= 0; i--) {
       prevMonthDays.push(new Date(prevMonthEnd.getFullYear(), prevMonthEnd.getMonth(), prevMonthEnd.getDate() - i));
@@ -98,7 +97,6 @@ function App() {
   const getNextMonthDays = () => {
     const lastDayOfMonth = monthEnd.getDay();
     const nextMonthDays = [];
-    // Adjust for Monday start
     const adjustedLastDay = lastDayOfMonth === 0 ? 6 : lastDayOfMonth - 1;
     const daysToAdd = 6 - adjustedLastDay;
     for (let i = 1; i <= daysToAdd; i++) {
@@ -147,7 +145,7 @@ function App() {
             </button>
             <div className="calendar-title">
               <select 
-                value={format(currentDate, 'MMMM')} 
+                value={currentDate.getMonth()} // Use month index instead of month name
                 onChange={handleMonthChange}
                 className="month-select"
               >

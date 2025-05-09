@@ -198,24 +198,24 @@ body {
 
 /* Weekend styles */
 .calendar-day:nth-child(7n+7) {
-  background-color: #fff5f5;
-  border-color: #fecaca;
+  background-color: white;
+  border-color: #e2e8f0;
 }
 
 .calendar-day:nth-child(7n+7):hover {
-  background-color: #fee2e2;
+  background-color: #f8fafc;
 }
 
 .calendar-day:nth-child(7n+7).other-month {
-  background-color: #fff5f5;
-  color: #fb7185;
-  opacity: 0.8;
+  background-color: white;
+  color: #94a3b8;
+  opacity: 0.7;
 }
 
 /* Holiday styles */
 .calendar-day.holiday {
   background: white;
-  border: 2px solid #fecaca;
+  border: 2px solid #3b82f6;
   position: relative;
 }
 
@@ -225,49 +225,37 @@ body {
   top: 4px;
   right: 4px;
   font-size: 0.75rem;
-  color: #fca5a5;
+  color: #3b82f6;
   opacity: 0.7;
 }
 
 .calendar-day.holiday:hover {
-  background: #fff5f5;
+  background: #f8fafc;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(248, 113, 113, 0.1);
-  border-color: #fca5a5;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
 }
 
 .calendar-day.holiday.other-month {
-  background: #fff5f5;
-  color: #fb7185;
-  opacity: 0.8;
-  border-color: #fecaca;
-}
-
-.calendar-day.holiday.selected {
-  background: #3b82f6;
-  color: white;
+  background: white;
+  color: #94a3b8;
+  opacity: 0.7;
   border-color: #3b82f6;
-}
-
-.calendar-day.holiday.today {
-  background: #dbeafe;
-  border-color: #3b82f6;
-  color: #1e293b;
 }
 
 .holiday-name {
   font-size: 0.75rem;
-  color: #fb7185;
+  color: #3b82f6;
   margin-top: 0.25rem;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 0.125rem 0.25rem;
-  background-color: rgba(254, 202, 202, 0.15);
+  background-color: rgba(59, 130, 246, 0.1);
   border-radius: 0.5rem;
   text-align: center;
-  border: 1px solid rgba(251, 113, 133, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .calendar-day.selected .holiday-name {
@@ -694,15 +682,15 @@ body {
 
 /* Holiday Info Section */
 .holiday-info {
-  background: linear-gradient(135deg, #fff5f5 0%, #fee2e2 100%);
-  border: 1px solid #fecaca;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border: 1px solid #3b82f6;
   border-radius: 1rem;
   padding: 1.25rem;
   margin-bottom: 1.5rem;
 }
 
 .holiday-title {
-  color: #fb7185;
+  color: #3b82f6;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 0.75rem 0;
@@ -716,36 +704,20 @@ body {
 }
 
 .holiday-type {
-  background: rgba(251, 113, 133, 0.08);
-  color: #fb7185;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
   padding: 0.375rem 0.75rem;
   border-radius: 0.5rem;
   font-size: 0.75rem;
   font-weight: 500;
-  border: 1px solid rgba(251, 113, 133, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .holiday-description {
-  color: #fb7185;
+  color: #3b82f6;
   font-size: 0.875rem;
   line-height: 1.5;
   margin: 0;
-}
-
-/* Weekend styles with holiday consideration */
-.calendar-day:nth-child(7n+7) {
-  background-color: #fff5f5;
-  border-color: #fecaca;
-}
-
-.calendar-day:nth-child(7n+7):hover {
-  background-color: #fee2e2;
-}
-
-.calendar-day:nth-child(7n+7).other-month {
-  background-color: #fff5f5;
-  color: #fb7185;
-  opacity: 0.8;
 }
 
 /* Remove duplicate weekend styles */
@@ -755,6 +727,16 @@ body {
   background-color: white;
   border-color: #e2e8f0;
   color: inherit;
+}
+
+/* Add red color for Sunday dates */
+.calendar-day:nth-child(7n+7) .calendar-day-number {
+  color: #dc2626;
+}
+
+.calendar-day:nth-child(7n+7).other-month .calendar-day-number {
+  color: #ef4444;
+  opacity: 0.7;
 }
 
 /* Responsive Design */
